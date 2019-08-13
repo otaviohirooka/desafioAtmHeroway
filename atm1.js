@@ -76,8 +76,9 @@ document.getElementById('btnConfirm').addEventListener('click', () => {
         nota50 = Math.floor((cashNumber % 100) / 50);
                                
         nota20 = Math.floor(((cashNumber % 100) % 50) / 20);
-        
-        nota10 = Math.floor(((cashNumber % 100) % 50) % 20);
+        debugger;
+        nota10 = Math.floor((((cashNumber % 100) % 50) % 20) / 10);
+        console.log(nota10);
         
         let bills = '';
 
