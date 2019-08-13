@@ -1,29 +1,6 @@
-function verifyBills(cashNumber) {
-    console.log(cashNumber);
-    if(cashNumber <= 0) {
-        document.getElementById('btnConfirm').addEventListener('click', () => {
-            alert("Erro: valor inválido.");
-        });
-    }else if(cashNumber = "") {
-        document.getElementById('btnConfirm').addEventListener('click', () => {
-            alert("Erro: valor nulo.");
-        });    
-    }else if(cashNumber % 10 != 0) {
-        document.getElementById('btnConfirm').addEventListener('click', () => {
-            alert("Erro: notas indisponíveis para sacar este valor.");
-        }); 
-    }else {
-        nota100 = cashNumber / 100;
-                                                                       
-        nota50 = (cashNumber % 100) / 50;
-
-        nota20 = ((cashNumber % 100) % 50) / 20;
-
-        nota10 = ((cashNumber % 100) % 50) % 20;
-    }
-}
 
 const input = document.getElementById('input');
+const output = document.getElementById('withdraw');
 
 const btnNumber1 = document.getElementById('btnNumber1');
 const btnNumber2 = document.getElementById('btnNumber2');
@@ -77,17 +54,54 @@ btnNumber0.addEventListener('click', () => {
     input.value = input.value +  Number(btnNumber0.textContent);
 });
 
-let nota11 = 0;
+let nota100 = 0;
 let nota50 = 0;
 let nota20 = 0;
 let nota10 = 0;
 
-console.log(input.value);
+document.getElementById('btnConfirm').addEventListener('click', () => {
 
-let cashNumber = Number(input.value);
+    let cashNumber = Number(input.value);
 
-verifyBills(cashNumber);
+    if(cashNumber <= 0) {
+            alert("Erro: valor inválido.");
+    }else if(cashNumber == "") {
+            alert("Erro: valor nulo.");
+    }else if(cashNumber % 10 != 0) {
+            alert("Erro: notas indisponíveis para sacar este valor.");
+    }else {
+       
+        nota100 = Math.floor(cashNumber / 100);
+                                                                        
+        nota50 = Math.floor((cashNumber % 100) / 50);
+                               
+        nota20 = Math.floor(((cashNumber % 100) % 50) / 20);
+        
+        nota10 = Math.floor(((cashNumber % 100) % 50) % 20);
+        
+        let bills = '';
+
+        for(let i = 0; i < nota100; i++) {
+            bills = bills + '$ 100 ';
+        }
+
+        for(let i = 0; i < nota50; i++) {
+            bills = bills + '$ 50 ';
+        }
+
+        for(let i = 0; i < nota20; i++) {
+            bills = bills + '$ 20 ';
+        }
+
+        for(let i = 0; i < nota10; i++) {
+            bills = bills + '$ 10 ';
+        }
+
+        output.innerText = bills;
+    }
+});
 
 document.getElementById('btnClear').addEventListener('click', () => {
     input.value = "";
+    output.value = "";
 })
