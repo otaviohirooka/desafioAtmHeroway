@@ -1,3 +1,28 @@
+function verifyBills(cashNumber) {
+    console.log(cashNumber);
+    if(cashNumber <= 0) {
+        document.getElementById('btnConfirm').addEventListener('click', () => {
+            alert("Erro: valor inválido.");
+        });
+    }else if(cashNumber = "") {
+        document.getElementById('btnConfirm').addEventListener('click', () => {
+            alert("Erro: valor nulo.");
+        });    
+    }else if(cashNumber % 10 != 0) {
+        document.getElementById('btnConfirm').addEventListener('click', () => {
+            alert("Erro: notas indisponíveis para sacar este valor.");
+        }); 
+    }else {
+        nota100 = cashNumber / 100;
+                                                                       
+        nota50 = (cashNumber % 100) / 50;
+
+        nota20 = ((cashNumber % 100) % 50) / 20;
+
+        nota10 = ((cashNumber % 100) % 50) % 20;
+    }
+}
+
 const input = document.getElementById('input');
 
 const btnNumber1 = document.getElementById('btnNumber1');
@@ -22,10 +47,10 @@ btnNumber2.addEventListener('click', () => {
 
 btnNumber3.addEventListener('click', () => {
     input.value = input.value +  Number(btnNumber3.textContent);
-  });
+});
 
 btnNumber4.addEventListener('click', () => {
-input.value = input.value +  Number(btnNumber4.textContent);
+    input.value = input.value +  Number(btnNumber4.textContent);
 });
 
 btnNumber5.addEventListener('click', () => {
@@ -51,3 +76,18 @@ btnNumber9.addEventListener('click', () => {
 btnNumber0.addEventListener('click', () => {
     input.value = input.value +  Number(btnNumber0.textContent);
 });
+
+let nota11 = 0;
+let nota50 = 0;
+let nota20 = 0;
+let nota10 = 0;
+
+console.log(input.value);
+
+let cashNumber = Number(input.value);
+
+verifyBills(cashNumber);
+
+document.getElementById('btnClear').addEventListener('click', () => {
+    input.value = "";
+})
